@@ -125,6 +125,17 @@
       border-radius: 2px;
     }
 
+    .interests { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .interest-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 5px 12px;
+      border: 1px solid #ddd8d0;
+      color: #555;
+      border-radius: 2px;
+    }
+
     .skills-list {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -162,6 +173,81 @@
       color: #999;
     }
 
+    /* EXPERIENCE */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .exp-item { position: relative; }
+
+    .exp-company {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #111;
+      margin-bottom: 2px;
+    }
+
+    .exp-footnote {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-style: italic;
+      color: #999;
+      margin-bottom: 6px;
+    }
+
+    .exp-role {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .exp-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: #111;
+    }
+
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #bbb;
+      white-space: nowrap;
+    }
+
+    .exp-promotions {
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 2px solid #ddd8d0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .exp-promo {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .exp-promo-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .exp-promo-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: #bbb;
+      white-space: nowrap;
+    }
+
     footer {
       font-family: 'DM Mono', monospace;
       margin-top: 80px;
@@ -186,6 +272,11 @@
 
       .skills-list {
         grid-template-columns: repeat(3, 1fr);
+      }
+
+      .exp-role, .exp-promo {
+        flex-direction: column;
+        gap: 2px;
       }
     }
   </style>
@@ -254,6 +345,18 @@
   <hr />
 
   <section>
+    <h2>My interests</h2>
+    <div class="interests">
+      <span class="interest-tag">Reading</span>
+      <span class="interest-tag">Coding</span>
+      <span class="interest-tag">Playing Sports</span>
+      <span class="interest-tag">Running</span>
+    </div>
+  </section>
+
+  <hr />
+
+  <section>
     <h2>Core skills</h2>
     <div class="skills-list">
       <span class="skill-tag">Google Ads</span>
@@ -271,6 +374,72 @@
       <span class="skill-tag">SEO</span>
       <span class="skill-tag">CRO</span>
       <span class="skill-tag">Copywriting</span>
+    </div>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2>My experience</h2>
+    <div class="experience-list">
+
+      <div class="exp-item">
+        <div class="exp-company">WPP (Mindshare)</div>
+        <div class="exp-footnote">Global Marketing &amp; Communications Group</div>
+        <div class="exp-role">
+          <span class="exp-title">Paid Search Manager</span>
+          <span class="exp-date">May 2025 – Present · 11 mos</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-company">Sharp Ahead</div>
+        <div class="exp-footnote">Full Service Digital Marketing Agency</div>
+        <div class="exp-role">
+          <span class="exp-title">Digital Marketing Consultant</span>
+          <span class="exp-date">Mar 2024 – May 2025 · 1 yr 2 mos</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-company">PureContent Media</div>
+        <div class="exp-footnote">Full Service Digital Marketing Agency</div>
+        <div class="exp-role">
+          <span class="exp-title">Senior Digital Marketing Specialist</span>
+          <span class="exp-date">Mar 2023 – Mar 2024 · 1 yr</span>
+        </div>
+        <div class="exp-promotions">
+          <div class="exp-promo">
+            <span class="exp-promo-title">Digital Marketing Specialist</span>
+            <span class="exp-promo-date">Mar 2022 – Mar 2023 · 1 yr</span>
+          </div>
+          <div class="exp-promo">
+            <span class="exp-promo-title">Digital Marketing Executive</span>
+            <span class="exp-promo-date">Jan 2022 – Mar 2022 · 3 mos</span>
+          </div>
+          <div class="exp-promo">
+            <span class="exp-promo-title">Digital Marketing Junior</span>
+            <span class="exp-promo-date">Oct 2021 – Dec 2021 · 3 mos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-company">Chartered Institute of Marketing (CIM)</div>
+        <div class="exp-role">
+          <span class="exp-title">Internship</span>
+          <span class="exp-date">Sept 2021 · 1 mo</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-company">Independent</div>
+        <div class="exp-role">
+          <span class="exp-title">Ecommerce Brand Founder</span>
+          <span class="exp-date">Jan 2021 – Sept 2021 · 9 mos</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
