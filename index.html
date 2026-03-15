@@ -128,6 +128,39 @@
       color: #444;
     }
 
+    .brands-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .brands-header h2 { margin-bottom: 0; }
+
+    .brands-nav { display: none; gap: 8px; }
+
+    .brands-nav-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: #999;
+      background: none;
+      border: 1px solid #ddd8d0;
+      border-radius: 2px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      line-height: 1;
+    }
+
+    .brands-nav-btn:hover { color: #111; border-color: #aaa; }
+    .brands-nav-btn:disabled { opacity: 0.25; cursor: default; }
+
+    .brands-wrap { position: relative; }
+
     .brands { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .brand-tag {
@@ -451,8 +484,18 @@
       hr { margin: 56px 0; }
       h2 { font-size: 10px; margin-bottom: 20px; }
       p { font-size: 15px; }
-      .brands { gap: 8px; }
-      .brand-tag { font-size: 13px; padding: 5px 12px; }
+      .brands-nav { display: flex; }
+      .brands-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0;
+        width: 60px;
+        background: linear-gradient(to right, transparent, #f5f0eb);
+        pointer-events: none;
+      }
+      .brands { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; }
+      .brands::-webkit-scrollbar { display: none; }
+      .brand-tag { flex-shrink: 0; font-size: 13px; padding: 5px 12px; }
       .about-tag { font-size: 13px; padding: 5px 12px; }
       .skills-list { grid-template-columns: repeat(3, 1fr); gap: 8px; }
       .skill-tag { font-size: 12px; padding: 7px 8px; }
@@ -504,22 +547,30 @@
   <hr />
 
   <section>
-    <h2>Brands I've worked with</h2>
-    <div class="brands">
-      <span class="brand-tag">eToro</span>
-      <span class="brand-tag">Unilever</span>
-      <span class="brand-tag">M&amp;S</span>
-      <span class="brand-tag">TK Maxx</span>
-      <span class="brand-tag">Mazda</span>
-      <span class="brand-tag">KFC</span>
-      <span class="brand-tag">First Group</span>
-      <span class="brand-tag">SWR</span>
-      <span class="brand-tag">GWR</span>
-      <span class="brand-tag">Avanti</span>
-      <span class="brand-tag">Virgin Media</span>
-      <span class="brand-tag">Amazon</span>
-      <span class="brand-tag">Morningstar</span>
-      <span class="brand-tag">Sustainalytics</span>
+    <div class="brands-header">
+      <h2>Brands I've worked with</h2>
+      <div class="brands-nav">
+        <button class="brands-nav-btn" id="b-prev" disabled>←</button>
+        <button class="brands-nav-btn" id="b-next">→</button>
+      </div>
+    </div>
+    <div class="brands-wrap">
+      <div class="brands">
+        <span class="brand-tag">eToro</span>
+        <span class="brand-tag">Unilever</span>
+        <span class="brand-tag">M&amp;S</span>
+        <span class="brand-tag">TK Maxx</span>
+        <span class="brand-tag">Mazda</span>
+        <span class="brand-tag">KFC</span>
+        <span class="brand-tag">First Group</span>
+        <span class="brand-tag">SWR</span>
+        <span class="brand-tag">GWR</span>
+        <span class="brand-tag">Avanti</span>
+        <span class="brand-tag">Virgin Media</span>
+        <span class="brand-tag">Amazon</span>
+        <span class="brand-tag">Morningstar</span>
+        <span class="brand-tag">Sustainalytics</span>
+      </div>
     </div>
   </section>
 
@@ -747,6 +798,23 @@
       tNext.addEventListener('click', () => scroll(1));
       track.addEventListener('scroll', updateBtns);
       updateBtns();
+    })();
+
+    (function() {
+      const bTrack = document.querySelector('.brands');
+      const bPrev = document.getElementById('b-prev');
+      const bNext = document.getElementById('b-next');
+      function updateBrandBtns() {
+        bPrev.disabled = bTrack.scrollLeft <= 1;
+        bNext.disabled = bTrack.scrollLeft >= bTrack.scrollWidth - bTrack.clientWidth - 1;
+      }
+      function scrollBrands(dir) {
+        bTrack.scrollBy({ left: dir * (bTrack.clientWidth * 0.75), behavior: 'smooth' });
+      }
+      bPrev.addEventListener('click', () => scrollBrands(-1));
+      bNext.addEventListener('click', () => scrollBrands(1));
+      bTrack.addEventListener('scroll', updateBrandBtns);
+      updateBrandBtns();
     })();
 
     document.querySelectorAll('.about-tab').forEach(tab => {
