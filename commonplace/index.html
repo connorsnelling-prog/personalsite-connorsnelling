@@ -23,9 +23,10 @@
     hr { border: none; border-top: 1px solid #ddd8d0; margin: 56px 0; }
     .entry-list { display: flex; flex-direction: column; }
     .entry-row {
-      display: flex;
-      align-items: baseline;
-      gap: 20px;
+      display: grid;
+      grid-template-columns: 100px 100px 1fr;
+      align-items: center;
+      gap: 0;
       padding: 22px 0;
       border-bottom: 1px solid #ddd8d0;
       text-decoration: none;
@@ -35,7 +36,7 @@
     .entry-row:first-child { padding-top: 0; }
     .entry-row:hover { opacity: 0.6; }
     .entry-date { font-family: 'DM Mono', monospace; font-size: 10px; color: #bbb; letter-spacing: 0.08em; white-space: nowrap; }
-    .entry-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; border: 1px solid #ddd8d0; border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+    .entry-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; border: 1px solid #ddd8d0; border-radius: 999px; padding: 2px 8px; white-space: nowrap; justify-self: start; }
     .entry-title { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 400; color: #111; }
     footer { font-family: 'DM Mono', monospace; margin-top: 80px; font-size: 11px; color: #bbb; display: flex; justify-content: space-between; align-items: center; }
     footer a { color: #bbb; border-bottom: 1px solid #ddd8d0; padding-bottom: 1px; }
@@ -43,7 +44,8 @@
     @media (max-width: 640px) {
       body { padding: 80px 24px 120px; }
       .page-title { font-size: 24px; }
-      .entry-row { flex-wrap: wrap; gap: 8px; }
+      .entry-row { grid-template-columns: 90px 90px 1fr; }
+      .entry-title { font-size: 14px; }
       footer { flex-direction: column; gap: 8px; align-items: flex-start; }
     }
   </style>
