@@ -90,7 +90,11 @@
   </div>
 
   <div class="entry-list">
-    <!-- entries go here, each with data-tag matching a filter -->
+    <a class="entry-row" href="/commonplace/a-brief-case-for-losing-the-plot" data-tag="hypothesis observation">
+      <span class="entry-date">9 Apr 2026</span>
+      <span class="entry-tag">Hypothesis</span>
+      <span class="entry-title">A brief case for losing the plot (cosmically speaking)</span>
+    </a>
   </div>
 
   <footer>
@@ -105,7 +109,8 @@
         tab.classList.add('active');
         const filter = tab.dataset.filter;
         document.querySelectorAll('.entry-row').forEach(row => {
-          row.style.display = filter === 'all' || row.dataset.tag === filter ? '' : 'none';
+          const tags = (row.dataset.tag || '').split(' ');
+          row.style.display = filter === 'all' || tags.includes(filter) ? '' : 'none';
         });
       });
     });
