@@ -42,7 +42,7 @@
     .filter-tab:hover { color: #555; border-color: #bbb; }
     .filter-tab.active { background: #ece9e1; border-color: #ece9e1; color: #111; }
 
-    .entry-list { display: flex; flex-direction: column; }
+    .entry-list { display: flex; flex-direction: column; border-top: 1px solid #ddd8d0; }
     .entry-row {
       display: grid;
       grid-template-columns: 100px 100px 1fr;
@@ -53,7 +53,6 @@
       color: inherit;
       transition: opacity 0.15s;
     }
-    .entry-row:first-child { padding-top: 0; }
     .entry-row:hover { opacity: 0.6; }
     .entry-date { font-family: 'DM Mono', monospace; font-size: 10px; color: #bbb; letter-spacing: 0.08em; white-space: nowrap; }
     .entry-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; border: 1px solid #ddd8d0; border-radius: 999px; padding: 2px 8px; white-space: nowrap; justify-self: start; }
@@ -72,9 +71,7 @@
       .filter-tabs { flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; margin-bottom: 24px; }
       .filter-tabs::-webkit-scrollbar { display: none; }
       .filter-tab { font-size: 8px; padding: 5px 10px; letter-spacing: 0.08em; white-space: nowrap; flex-shrink: 0; }
-      .entry-list { border-top: 1px solid #ddd8d0; }
       .entry-row { display: flex; flex-direction: column; gap: 4px; padding: 18px 0; }
-      .entry-row:first-child { padding-top: 18px; }
       .entry-tag { display: none; }
       .entry-title { order: 1; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .entry-date { order: 2; font-size: 10px; }
