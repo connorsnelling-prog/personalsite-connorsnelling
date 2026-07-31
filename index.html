@@ -30,6 +30,50 @@
 
     ::selection { background: #ddd8d0; color: #111; }
 
+    html { scroll-behavior: smooth; }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: #f5f0eb;
+      border-bottom: 1px solid #ddd8d0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 48px;
+      padding: 0 48px;
+    }
+
+    .site-nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .site-nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #bbb;
+      transition: color 0.15s;
+    }
+
+    .site-nav-links a:hover { color: #111; }
+
+    .site-nav-links a.active { color: #111; }
+
+    #brands, #about, #testimonials { scroll-margin-top: 72px; }
+
+    @media (max-width: 640px) {
+      .site-nav { padding: 0 24px; }
+      .site-nav-links { gap: 20px; }
+      .site-nav-links a { font-size: 9px; }
+    }
+
     .cursor-dot {
       width: 7px;
       height: 7px;
@@ -598,6 +642,15 @@
 </head>
 <body>
 
+  <nav class="site-nav">
+    <div class="site-nav-links">
+      <a href="#brands">Brands</a>
+      <a href="/conbot">con.bot</a>
+      <a href="#about">About me</a>
+      <a href="#testimonials">Testimonials</a>
+    </div>
+  </nav>
+
   <div class="hero">
     <img class="avatar" src="avatar.jpg" alt="Connor Snelling" />
     <h1>Hi, I'm Connor.</h1>
@@ -631,7 +684,7 @@
 
   <hr />
 
-  <section>
+  <section id="brands">
     <div class="brands-header">
       <h2>Brands I've worked with</h2>
       <div class="brands-nav">
@@ -674,7 +727,7 @@
 
   <hr />
 
-  <section>
+  <section id="about">
     <h2>About me</h2>
     <div class="about-tabs">
       <button class="about-tab active" data-tab="techstack">Tech Stack</button>
@@ -752,7 +805,7 @@
 
   <hr />
 
-  <section>
+  <section id="testimonials">
     <div class="testimonials-header">
       <h2>Testimonials</h2>
       <div class="testimonials-nav">
