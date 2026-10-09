@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Stats — Connor Snelling</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-791CMK5H7S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-791CMK5H7S');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; cursor: none; }
+    ::selection { background: #ddd8d0; color: #111; }
+    html { scroll-behavior: smooth; }
+    .cursor-dot { width: 7px; height: 7px; background: #111; border-radius: 50%; position: fixed; pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; transition: opacity 0.2s; }
+    .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #f5f0eb; border-bottom: 1px solid #ddd8d0; display: flex; justify-content: center; align-items: center; height: 48px; padding: 0 48px; }
+    .site-nav-links { display: flex; gap: 32px; align-items: center; }
+    .site-nav-links a { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; transition: color 0.15s; }
+    .site-nav-links a:hover { color: #111; }
+    .site-nav-links a.active { color: #111; }
+    body { font-family: 'DM Mono', monospace; font-weight: 300; font-size: 14px; line-height: 1.8; color: #111; background: #f5f0eb; max-width: 860px; margin: 0 auto; padding: 120px 48px 160px; }
+    @media (max-width: 640px) { .site-nav { padding: 0 24px; } .site-nav-links { gap: 12px; } .site-nav-links a { font-size: 9px; letter-spacing: 0.08em; white-space: nowrap; } }
+    a { color: inherit; text-decoration: none; }
+    .back-link { font-family: 'DM Mono', monospace; font-size: 11px; color: #999; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 28px; transition: color 0.15s; }
+    .back-link:hover { color: #111; }
+    .site-header { margin-bottom: 24px; }
+    .page-title { font-family: 'DM Mono', monospace; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .page-intro { font-family: 'DM Sans', sans-serif; font-size: 15px; color: #555; font-weight: 300; line-height: 1.75; }
+    hr { border: none; border-top: 1px solid #ddd8d0; margin: 28px 0; }
+
+    /* ── Gate ── */
+    .gate { max-width: 360px; }
+    .wip-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; border: 1px solid #ddd8d0; border-radius: 999px; padding: 2px 10px; margin-bottom: 20px; }
+    .gate-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #999; display: block; margin-bottom: 10px; }
+    .gate-form { display: flex; gap: 8px; }
+    .gate-input { font-family: 'DM Mono', monospace; font-size: 18px; letter-spacing: 0.5em; width: 140px; padding: 8px 12px; background: transparent; border: 1px solid #ddd8d0; border-radius: 4px; color: #111; outline: none; transition: border-color 0.15s; }
+    .gate-input:focus { border-color: #111; }
+    .gate-input.error { border-color: #c0766a; animation: shake 0.3s; }
+    .gate-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 18px; border: 1px solid #ddd8d0; border-radius: 999px; background: transparent; color: #555; transition: all 0.15s; }
+    .gate-btn:hover { border-color: #111; color: #111; }
+    .gate-note { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; margin-top: 20px; line-height: 1.7; }
+    .gate-error { font-family: 'DM Mono', monospace; font-size: 11px; color: #c0766a; margin-top: 10px; min-height: 20px; }
+    @keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+    /* ── Character sheet ── */
+    .sheet[hidden], .gate[hidden] { display: none; }
+    .overview { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #ddd8d0; border-bottom: 1px solid #ddd8d0; margin-bottom: 48px; }
+    .overview-cell { padding: 20px 0; }
+    .overview-cell + .overview-cell { padding-left: 24px; border-left: 1px solid #ddd8d0; }
+    .ov-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; display: block; margin-bottom: 4px; }
+    .ov-value { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+    .ov-value small { font-size: 11px; color: #bbb; font-weight: 300; }
+
+    .category { margin-bottom: 56px; }
+    .cat-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid #ddd8d0; margin-bottom: 8px; }
+    .cat-name { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+    .cat-avg { font-size: 11px; color: #999; display: flex; align-items: center; gap: 10px; }
+    .cat-avg strong { font-size: 16px; font-weight: 500; color: #111; }
+    .cat-bar { width: 80px; height: 4px; background: #ece9e1; border-radius: 2px; overflow: hidden; }
+    .cat-bar span { display: block; height: 100%; background: #111; }
+
+    .skill-group + .skill-group { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e6e1d9; }
+    .skill { display: grid; grid-template-columns: 1fr auto 32px; align-items: center; gap: 16px; padding: 7px 0; }
+    .skill-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: #111; }
+    .pips { display: flex; gap: 4px; }
+    .pip { width: 22px; height: 8px; border-radius: 2px; background: #ece9e1; border: 1px solid #ddd8d0; }
+    .pip.on { background: #111; border-color: #111; }
+    .skill-score { font-size: 11px; color: #999; text-align: right; }
+    .skill.locked .skill-name { color: #bbb; }
+    .skill.locked .pip { background: transparent; border-style: dashed; }
+    .skill.locked .skill-score { color: #ccc; }
+    .cat-avg.unassessed { color: #bbb; }
+
+    .sheet-note { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #999; }
+
+    footer { font-family: 'DM Mono', monospace; margin-top: 48px; font-size: 11px; color: #bbb; display: flex; justify-content: space-between; align-items: center; }
+    footer a { color: #bbb; border-bottom: 1px solid #ddd8d0; padding-bottom: 1px; }
+    footer a:hover { color: #111; border-color: #111; }
+
+    @media (max-width: 640px) {
+      body { padding: 80px 24px 120px; }
+      .page-title { font-size: 24px; }
+      .overview-cell + .overview-cell { padding-left: 14px; }
+      .ov-value { font-size: 16px; }
+      .skill { gap: 10px; }
+      .skill-name { font-size: 13px; }
+      .pip { width: 14px; height: 7px; }
+      .pips { gap: 3px; }
+      .cat-bar { width: 48px; }
+      footer { flex-direction: column; gap: 8px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="site-nav-links">
+      <a href="/">Home</a>
+      <a href="/#brands">Brands</a>
+      <a href="/conbot">con.bot</a>
+      <a href="/stats" class="active">Stats</a>
+      <a href="/#about">About me</a>
+      <a href="/#testimonials">Testimonials</a>
+    </div>
+  </nav>
+
+  <div class="site-header">
+    <a class="back-link" href="/">← connorsnelling.co.uk</a>
+    <h1 class="page-title">Skill Tree</h1>
+    <p class="page-intro">Character stats, honestly assessed. Each skill scored one to five.</p>
+  </div>
+
+  <hr />
+
+  <section class="gate" id="gate">
+    <span class="wip-badge">Work in progress</span>
+    <label class="gate-label" for="gate-input">Enter access code</label>
+    <form class="gate-form" id="gate-form" autocomplete="off">
+      <input class="gate-input" id="gate-input" type="password" inputmode="numeric" maxlength="4" autofocus />
+      <button class="gate-btn" type="submit">Unlock</button>
+    </form>
+    <div class="gate-error" id="gate-error"></div>
+    <p class="gate-note">This section is a work in progress and currently private. Stats are still being levelled up, and some haven't been assessed yet.</p>
+  </section>
+
+  <section class="sheet" id="sheet" hidden>
+    <div class="overview">
+      <div class="overview-cell"><span class="ov-label">Overall level</span><span class="ov-value" id="ov-level"></span></div>
+      <div class="overview-cell"><span class="ov-label">Skills assessed</span><span class="ov-value" id="ov-count"></span></div>
+      <div class="overview-cell"><span class="ov-label">Maxed out</span><span class="ov-value" id="ov-max"></span></div>
+    </div>
+    <div id="categories"></div>
+    <p class="sheet-note">Work in progress. Dashed skills are unassessed and excluded from averages.</p>
+  </section>
+
+  <footer>
+    <span>© 2026 Connor Snelling</span>
+    <a href="/">connorsnelling.co.uk</a>
+  </footer>
+
+  <script>
+    // Scores are 1–5. null = not yet assessed (excluded from averages).
+    // Each inner array is a group of related skills, shown together.
+    const STATS = [
+      { name: 'Work & Professional', groups: [
+        [['Paid Search', 3], ['Paid Social', 3], ['SEO', 2], ['CRO', 2], ['Analytics', 2], ['Copywriting', 2], ['Reporting', 4]],
+        [['Delegation', 3], ['Feedback', 3], ['Stakeholder Handling', 3]],
+        [['Writing', 2], ['Presenting', 3], ['Negotiation', 2]],
+      ]},
+      { name: 'Life Skills', groups: [
+        [['Cooking', 5], ['DIY', 1], ['Cleaning', 3]],
+        [['Budgeting', 4], ['Admin', 4]],
+        [['Directions', 5]],
+      ]},
+      { name: 'Tech', groups: [
+        [['AI Tools', 3], ['Coding', 1], ['Hardware', 4]],
+      ]},
+      { name: 'Creative', groups: [
+        [['Writing', 1], ['Design', 2], ['Photography', 3], ['Videography', 2]],
+      ]},
+      { name: 'Body & Mind', groups: [
+        [['Strength', 1], ['Endurance', 2]],
+        [['Sleep Discipline', 4], ['Stress Tolerance', 3], ['Patience', 3], ['Focus', 1]],
+        [['Consistency', 1], ['Self-Awareness', 5], ['Resilience', 3]],
+      ]},
+      { name: 'Knowledge', groups: [
+        [['Reading Speed', 3], ['Retention', 3]],
+        [['Cosmology', null], ['History', null], ['Geography', null], ['Trivia', null], ['Languages', null]],
+      ]},
+      { name: 'Social', groups: [
+        [['Small Talk', null], ['Listening', null], ['Humour', null], ['Conversationalism', null]],
+      ]},
+    ];
+
+    const CODE_HASH = '9b7db63b1e95c2891660533fdcc7e5300af42e36966247b4928db477cd5a0f77';
+    const avg = xs => xs.reduce((a, b) => a + b, 0) / xs.length;
+    const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+    function render() {
+      const all = [];
+      document.getElementById('categories').innerHTML = STATS.map(cat => {
+        const scored = cat.groups.flat().map(s => s[1]).filter(v => v != null);
+        all.push(...scored);
+        const a = scored.length ? avg(scored) : null;
+        const head = a == null
+          ? '<span class="cat-avg unassessed">Unassessed</span>'
+          : `<span class="cat-avg"><span class="cat-bar"><span style="width:${a / 5 * 100}%"></span></span><strong>${a.toFixed(1)}</strong>/ 5</span>`;
+        const groups = cat.groups.map(g => '<div class="skill-group">' + g.map(([name, v]) => {
+          const pips = [1, 2, 3, 4, 5].map(i => `<span class="pip${v != null && i <= v ? ' on' : ''}"></span>`).join('');
+          return `<div class="skill${v == null ? ' locked' : ''}"><span class="skill-name">${esc(name)}</span><span class="pips" aria-label="${v == null ? 'Unassessed' : v + ' out of 5'}">${pips}</span><span class="skill-score">${v == null ? '—' : v + '/5'}</span></div>`;
+        }).join('') + '</div>').join('');
+        return `<div class="category"><div class="cat-head"><span class="cat-name">${esc(cat.name)}</span>${head}</div>${groups}</div>`;
+      }).join('');
+      const total = STATS.reduce((n, c) => n + c.groups.flat().length, 0);
+      document.getElementById('ov-level').innerHTML = `${avg(all).toFixed(1)} <small>/ 5</small>`;
+      document.getElementById('ov-count').innerHTML = `${all.length} <small>/ ${total}</small>`;
+      document.getElementById('ov-max').textContent = all.filter(v => v === 5).length;
+    }
+
+    function unlock() {
+      document.getElementById('gate').hidden = true;
+      document.getElementById('sheet').hidden = false;
+      render();
+    }
+
+    async function sha256(text) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+      return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    let unlocked = false;
+    try { unlocked = sessionStorage.getItem('stats-unlocked') === '1'; } catch (e) {}
+    if (unlocked) unlock();
+
+    document.getElementById('gate-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const input = document.getElementById('gate-input');
+      if (await sha256(input.value.trim()) === CODE_HASH) {
+        try { sessionStorage.setItem('stats-unlocked', '1'); } catch (e) {}
+        unlock();
+      } else {
+        input.classList.remove('error');
+        void input.offsetWidth;
+        input.classList.add('error');
+        document.getElementById('gate-error').textContent = 'Incorrect code.';
+        input.value = '';
+      }
+    });
+  </script>
+  <script>
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    document.body.appendChild(dot);
+    document.addEventListener('mousemove', e => {
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', () => dot.style.opacity = '0');
+    document.addEventListener('mouseenter', () => dot.style.opacity = '1');
+  </script>
+</body>
+</html>
