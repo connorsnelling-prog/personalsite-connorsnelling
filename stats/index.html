@@ -56,26 +56,46 @@
 
     /* ── Character sheet ── */
     .sheet[hidden], .gate[hidden] { display: none; }
-    .overview { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #ddd8d0; border-bottom: 1px solid #ddd8d0; margin-bottom: 48px; }
-    .overview-cell { padding: 20px 0; }
-    .overview-cell + .overview-cell { padding-left: 24px; border-left: 1px solid #ddd8d0; }
-    .ov-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; display: block; margin-bottom: 4px; }
+    .hero { display: grid; grid-template-columns: 1fr 220px; gap: 48px; align-items: center; border-bottom: 1px solid #ddd8d0; padding-bottom: 32px; margin-bottom: 40px; }
+    .radar-wrap { position: relative; }
+    .radar { display: block; width: 100%; max-width: 460px; height: auto; margin: 0 auto; overflow: visible; }
+    .radar .ring { fill: none; stroke: #ddd8d0; stroke-width: 1; }
+    .radar .spoke { stroke: #e6e1d9; stroke-width: 1; }
+    .radar .ring-label { font-family: 'DM Mono', monospace; font-size: 8px; fill: #bbb; }
+    .radar .area { fill: rgba(17, 17, 17, 0.07); stroke: #111; stroke-width: 2; stroke-linejoin: round; }
+    .radar .vertex { fill: #111; stroke: #f5f0eb; stroke-width: 2; transition: r 0.15s; }
+    .radar .axis { cursor: none; }
+    .radar .axis:hover .vertex, .radar .axis.hover .vertex { r: 6; }
+    .radar .axis-name { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; fill: #999; transition: fill 0.15s; }
+    .radar .axis-val { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; fill: #111; }
+    .radar .axis:hover .axis-name, .radar .axis.hover .axis-name { fill: #111; }
+    .radar .hit { fill: transparent; }
+    .radar-tip { position: absolute; pointer-events: none; background: #111; color: #f5f0eb; font-size: 11px; line-height: 1.5; padding: 8px 12px; border-radius: 4px; white-space: nowrap; opacity: 0; transform: translate(-50%, calc(-100% - 12px)); transition: opacity 0.12s; }
+    .radar-tip.show { opacity: 1; }
+    .radar-tip span { color: #999; }
+
+    .overview { display: flex; flex-direction: column; }
+    .overview-cell { padding: 14px 0; }
+    .overview-cell + .overview-cell { border-top: 1px solid #ddd8d0; }
+    .ov-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; display: block; margin-bottom: 2px; }
     .ov-value { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
     .ov-value small { font-size: 11px; color: #bbb; font-weight: 300; }
+    .ov-sub { font-size: 14px; font-weight: 400; }
 
-    .category { margin-bottom: 56px; }
-    .cat-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid #ddd8d0; margin-bottom: 8px; }
+    #categories { columns: 2; column-gap: 48px; }
+    .category { break-inside: avoid; margin-bottom: 40px; scroll-margin-top: 72px; }
+    .cat-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 10px; border-bottom: 1px solid #ddd8d0; margin-bottom: 6px; }
     .cat-name { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
     .cat-avg { font-size: 11px; color: #999; display: flex; align-items: center; gap: 10px; }
     .cat-avg strong { font-size: 16px; font-weight: 500; color: #111; }
-    .cat-bar { width: 80px; height: 4px; background: #ece9e1; border-radius: 2px; overflow: hidden; }
+    .cat-bar { width: 56px; height: 4px; background: #ece9e1; border-radius: 2px; overflow: hidden; }
     .cat-bar span { display: block; height: 100%; background: #111; }
 
-    .skill-group + .skill-group { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e6e1d9; }
-    .skill { display: grid; grid-template-columns: 1fr auto 32px; align-items: center; gap: 16px; padding: 7px 0; }
-    .skill-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: #111; }
-    .pips { display: flex; gap: 4px; }
-    .pip { width: 22px; height: 8px; border-radius: 2px; background: #ece9e1; border: 1px solid #ddd8d0; }
+    .skill-group + .skill-group { margin-top: 6px; padding-top: 6px; border-top: 1px dashed #e6e1d9; }
+    .skill { display: grid; grid-template-columns: 1fr auto 28px; align-items: center; gap: 12px; padding: 3px 0; }
+    .skill-name { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: #111; }
+    .pips { display: flex; gap: 3px; }
+    .pip { width: 14px; height: 7px; border-radius: 2px; background: #ece9e1; border: 1px solid #ddd8d0; }
     .pip.on { background: #111; border-color: #111; }
     .skill-score { font-size: 11px; color: #999; text-align: right; }
     .skill.locked .skill-name { color: #bbb; }
@@ -92,13 +112,18 @@
     @media (max-width: 640px) {
       body { padding: 80px 24px 120px; }
       .page-title { font-size: 24px; }
-      .overview-cell + .overview-cell { padding-left: 14px; }
+      .hero { grid-template-columns: 1fr; gap: 16px; }
+      .overview { display: grid; grid-template-columns: 1fr 1fr; }
+      .overview-cell + .overview-cell { border-top: none; }
+      .overview-cell { border-top: 1px solid #ddd8d0; padding: 12px 0; }
+      .overview-cell:nth-child(even) { padding-left: 16px; border-left: 1px solid #ddd8d0; }
       .ov-value { font-size: 16px; }
-      .skill { gap: 10px; }
-      .skill-name { font-size: 13px; }
-      .pip { width: 14px; height: 7px; }
-      .pips { gap: 3px; }
-      .cat-bar { width: 48px; }
+      .ov-sub { font-size: 12px; }
+      #categories { columns: 1; }
+      .radar .axis-name { font-size: 12px; letter-spacing: 0.06em; }
+      .radar .axis-val { font-size: 15px; }
+      .radar .ring-label { font-size: 10px; }
+      .skill { gap: 10px; padding: 4px 0; }
       footer { flex-direction: column; gap: 8px; align-items: flex-start; }
     }
   </style>
@@ -131,14 +156,21 @@
       <button class="gate-btn" type="submit">Unlock</button>
     </form>
     <div class="gate-error" id="gate-error"></div>
-    <p class="gate-note">This section is a work in progress and currently private. Stats are still being levelled up, and some haven't been assessed yet.</p>
+    <p class="gate-note">This section is a work in progress and currently private. Stats are still being levelled up.</p>
   </section>
 
   <section class="sheet" id="sheet" hidden>
-    <div class="overview">
-      <div class="overview-cell"><span class="ov-label">Overall level</span><span class="ov-value" id="ov-level"></span></div>
-      <div class="overview-cell"><span class="ov-label">Skills assessed</span><span class="ov-value" id="ov-count"></span></div>
-      <div class="overview-cell"><span class="ov-label">Maxed out</span><span class="ov-value" id="ov-max"></span></div>
+    <div class="hero">
+      <div class="radar-wrap">
+        <svg class="radar" id="radar" viewBox="-230 -190 460 380" role="img" aria-label="Radar chart of average score per category"></svg>
+        <div class="radar-tip" id="radar-tip"></div>
+      </div>
+      <div class="overview">
+        <div class="overview-cell"><span class="ov-label">Overall level</span><span class="ov-value" id="ov-level"></span></div>
+        <div class="overview-cell"><span class="ov-label">Strongest</span><span class="ov-value ov-sub" id="ov-best"></span></div>
+        <div class="overview-cell"><span class="ov-label">Weakest</span><span class="ov-value ov-sub" id="ov-worst"></span></div>
+        <div class="overview-cell"><span class="ov-label">Maxed out</span><span class="ov-value" id="ov-max"></span></div>
+      </div>
     </div>
     <div id="categories"></div>
     <p class="sheet-note">Work in progress. Stats are reassessed as they level up.</p>
@@ -187,12 +219,17 @@
     const avg = xs => xs.reduce((a, b) => a + b, 0) / xs.length;
     const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
+    const slug = s => s.toLowerCase().replace(/[^a-z]+/g, '-');
+
     function render() {
       const all = [];
-      document.getElementById('categories').innerHTML = STATS.map(cat => {
+      const cats = STATS.map(cat => {
         const scored = cat.groups.flat().map(s => s[1]).filter(v => v != null);
         all.push(...scored);
-        const a = scored.length ? avg(scored) : null;
+        return { ...cat, avg: scored.length ? avg(scored) : null, count: scored.length };
+      });
+      document.getElementById('categories').innerHTML = cats.map(cat => {
+        const a = cat.avg;
         const head = a == null
           ? '<span class="cat-avg unassessed">Unassessed</span>'
           : `<span class="cat-avg"><span class="cat-bar"><span style="width:${a / 5 * 100}%"></span></span><strong>${a.toFixed(1)}</strong>/ 5</span>`;
@@ -200,12 +237,64 @@
           const pips = [1, 2, 3, 4, 5].map(i => `<span class="pip${v != null && i <= v ? ' on' : ''}"></span>`).join('');
           return `<div class="skill${v == null ? ' locked' : ''}"><span class="skill-name">${esc(name)}</span><span class="pips" aria-label="${v == null ? 'Unassessed' : v + ' out of 5'}">${pips}</span><span class="skill-score">${v == null ? '—' : v + '/5'}</span></div>`;
         }).join('') + '</div>').join('');
-        return `<div class="category"><div class="cat-head"><span class="cat-name">${esc(cat.name)}</span>${head}</div>${groups}</div>`;
+        return `<div class="category" id="${slug(cat.name)}"><div class="cat-head"><span class="cat-name">${esc(cat.name)}</span>${head}</div>${groups}</div>`;
       }).join('');
-      const total = STATS.reduce((n, c) => n + c.groups.flat().length, 0);
+
+      const ranked = cats.filter(c => c.avg != null).sort((x, y) => y.avg - x.avg);
+      const best = ranked[0], worst = ranked[ranked.length - 1];
       document.getElementById('ov-level').innerHTML = `${avg(all).toFixed(1)} <small>/ 5</small>`;
-      document.getElementById('ov-count').innerHTML = `${all.length} <small>/ ${total}</small>`;
-      document.getElementById('ov-max').textContent = all.filter(v => v === 5).length;
+      document.getElementById('ov-best').innerHTML = `${esc(best.name)} <small>${best.avg.toFixed(1)}</small>`;
+      document.getElementById('ov-worst').innerHTML = `${esc(worst.name)} <small>${worst.avg.toFixed(1)}</small>`;
+      document.getElementById('ov-max').innerHTML = `${all.filter(v => v === 5).length} <small>skills at 5/5</small>`;
+      renderRadar(cats);
+    }
+
+    function renderRadar(cats) {
+      const svg = document.getElementById('radar');
+      const tip = document.getElementById('radar-tip');
+      const R = 130, n = cats.length;
+      const pt = (i, r) => {
+        const ang = -Math.PI / 2 + i * 2 * Math.PI / n;
+        return [Math.cos(ang) * r, Math.sin(ang) * r];
+      };
+      const poly = r => cats.map((_, i) => pt(i, r).map(v => v.toFixed(1)).join(',')).join(' ');
+      let out = '';
+      for (let lv = 1; lv <= 5; lv++) {
+        out += `<polygon class="ring" points="${poly(R * lv / 5)}" />`;
+        out += `<text class="ring-label" x="4" y="${(-R * lv / 5 + 3).toFixed(1)}">${lv}</text>`;
+      }
+      cats.forEach((_, i) => { const [x, y] = pt(i, R); out += `<line class="spoke" x1="0" y1="0" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" />`; });
+      out += `<polygon class="area" points="${cats.map((c, i) => pt(i, R * (c.avg || 0) / 5).map(v => v.toFixed(1)).join(',')).join(' ')}" />`;
+      cats.forEach((c, i) => {
+        const [vx, vy] = pt(i, R * (c.avg || 0) / 5);
+        const [lx, ly] = pt(i, R + 22);
+        const anchor = Math.abs(lx) < 8 ? 'middle' : lx > 0 ? 'start' : 'end';
+        const dy = ly < -R ? -14 : ly > R * 0.6 ? 6 : -4;
+        out += `<g class="axis" data-i="${i}">
+          <circle class="hit" cx="${vx.toFixed(1)}" cy="${vy.toFixed(1)}" r="16" />
+          <circle class="vertex" cx="${vx.toFixed(1)}" cy="${vy.toFixed(1)}" r="4" />
+          <text text-anchor="${anchor}" x="${lx.toFixed(1)}" y="${(ly + dy).toFixed(1)}">
+            <tspan class="axis-name">${esc(c.name)}</tspan>
+            <tspan class="axis-val" x="${lx.toFixed(1)}" dy="14">${c.avg == null ? '—' : c.avg.toFixed(1)}</tspan>
+          </text>
+        </g>`;
+      });
+      svg.innerHTML = out;
+
+      svg.querySelectorAll('.axis').forEach(g => {
+        const c = cats[g.dataset.i];
+        const v = g.querySelector('.vertex');
+        g.addEventListener('mouseenter', () => {
+          const box = svg.getBoundingClientRect(), wrap = svg.parentNode.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+          const s = box.width / vb.width;
+          tip.style.left = (box.left - wrap.left + (v.cx.baseVal.value - vb.x) * s) + 'px';
+          tip.style.top = (box.top - wrap.top + (v.cy.baseVal.value - vb.y) * s) + 'px';
+          tip.innerHTML = `${esc(c.name)}<br>${c.avg == null ? 'Unassessed' : c.avg.toFixed(1) + ' / 5'} <span>· ${c.count} skills</span>`;
+          tip.classList.add('show');
+        });
+        g.addEventListener('mouseleave', () => tip.classList.remove('show'));
+        g.addEventListener('click', () => document.getElementById(slug(c.name)).scrollIntoView({ behavior: 'smooth' }));
+      });
     }
 
     function unlock() {
