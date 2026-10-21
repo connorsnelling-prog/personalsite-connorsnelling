@@ -38,32 +38,11 @@
     .site-header { margin-bottom: 24px; }
     .page-title { font-family: 'DM Mono', monospace; font-size: 32px; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 12px; }
     .page-intro { font-family: 'DM Sans', sans-serif; font-size: 15px; color: #555; font-weight: 300; line-height: 1.75; }
-    hr { border: none; border-top: 1px solid #ddd8d0; margin: 28px 0; }
-
-    .filter-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .filter-tab {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 7px 16px;
-      border: 1px solid #ddd8d0;
-      border-radius: 999px;
-      color: #999;
-      background: transparent;
-
-      transition: all 0.15s ease;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    .filter-tab:hover { color: #555; border-color: #bbb; }
-    .filter-tab.active { background: #ece9e1; border-color: #ece9e1; color: #111; }
 
     .entry-list { display: flex; flex-direction: column; border-top: 1px solid #ddd8d0; }
     .entry-row {
       display: grid;
-      grid-template-columns: 100px 100px 1fr;
+      grid-template-columns: 100px 1fr;
       align-items: center;
       padding: 22px 0;
       border-bottom: 1px solid #ddd8d0;
@@ -73,7 +52,6 @@
     }
     .entry-row:hover { opacity: 0.6; }
     .entry-date { font-family: 'DM Mono', monospace; font-size: 10px; color: #bbb; letter-spacing: 0.08em; white-space: nowrap; }
-    .entry-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #aaa; border: 1px solid #ddd8d0; border-radius: 999px; padding: 2px 8px; white-space: nowrap; justify-self: start; }
     .entry-title { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 400; color: #111; }
 
     footer { font-family: 'DM Mono', monospace; margin-top: 48px; font-size: 11px; color: #bbb; display: flex; justify-content: space-between; align-items: center; }
@@ -85,12 +63,7 @@
       .back-link { margin-bottom: 28px; }
       .site-header { margin-bottom: 24px; }
       .page-title { font-size: 24px; margin-bottom: 12px; }
-      hr { margin: 28px 0; }
-      .filter-tabs { flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; margin-bottom: 24px; }
-      .filter-tabs::-webkit-scrollbar { display: none; }
-      .filter-tab { font-size: 8px; padding: 5px 10px; letter-spacing: 0.08em; white-space: nowrap; flex-shrink: 0; }
       .entry-row { display: flex; flex-direction: column; gap: 4px; padding: 18px 0; }
-      .entry-tag { display: none; }
       .entry-title { order: 1; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .entry-date { order: 2; font-size: 10px; }
       footer { flex-direction: column; gap: 8px; align-items: flex-start; margin-top: 48px; }
@@ -115,19 +88,14 @@
     <p class="page-intro">A collection of things I've thought about long enough to write down.</p>
   </div>
 
-  <div class="filter-tabs">
-    <button class="filter-tab active" data-filter="all">All</button>
-    <button class="filter-tab" data-filter="misc">Misc</button>
-    <button class="filter-tab" data-filter="hypothesis">Hypothesis</button>
-    <button class="filter-tab" data-filter="observation">Observation</button>
-    <button class="filter-tab" data-filter="method">Method</button>
-  </div>
-
   <div class="entry-list">
-    <a class="entry-row" href="/commonplace/a-brief-case-for-losing-the-plot" data-tag="hypothesis observation">
+    <a class="entry-row" href="/commonplace/a-brief-case-for-losing-the-plot">
       <span class="entry-date">9 Apr 2026</span>
-      <span class="entry-tag">Hypothesis</span>
       <span class="entry-title">A brief case for losing the plot (cosmically speaking)</span>
+    </a>
+    <a class="entry-row" href="/commonplace/time-is-precious-waste-it-wisely">
+      <span class="entry-date">12 Feb 2026</span>
+      <span class="entry-title">Time is precious, waste it wisely</span>
     </a>
   </div>
 
@@ -136,19 +104,6 @@
     <a href="/">connorsnelling.co.uk</a>
   </footer>
 
-  <script>
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const filter = tab.dataset.filter;
-        document.querySelectorAll('.entry-row').forEach(row => {
-          const tags = (row.dataset.tag || '').split(' ');
-          row.style.display = filter === 'all' || tags.includes(filter) ? '' : 'none';
-        });
-      });
-    });
-  </script>
   <script>
     if (window.matchMedia('(pointer: fine)').matches) {
     const dot = document.createElement('div');
