@@ -29,6 +29,7 @@
     }
 
     ::selection { background: #ddd8d0; color: #111; }
+    @media (pointer: coarse) { * { cursor: auto; } }
 
     html { scroll-behavior: smooth; }
 
@@ -1027,6 +1028,7 @@
   </script>
 
   <script>
+    if (window.matchMedia('(pointer: fine)').matches) {
     const dot = document.createElement('div');
     dot.className = 'cursor-dot';
     document.body.appendChild(dot);
@@ -1036,6 +1038,7 @@
     });
     document.addEventListener('mouseleave', () => dot.style.opacity = '0');
     document.addEventListener('mouseenter', () => dot.style.opacity = '1');
+    }
   </script>
 </body>
 </html>

@@ -22,6 +22,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; cursor: none; }
     ::selection { background: #ddd8d0; color: #111; }
+    @media (pointer: coarse) { * { cursor: auto; } }
     html { scroll-behavior: smooth; }
     .cursor-dot { width: 7px; height: 7px; background: #111; border-radius: 50%; position: fixed; pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; transition: opacity 0.2s; }
     .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #f5f0eb; border-bottom: 1px solid #ddd8d0; display: flex; justify-content: center; align-items: center; height: 48px; padding: 0 48px; }
@@ -149,6 +150,7 @@
     });
   </script>
   <script>
+    if (window.matchMedia('(pointer: fine)').matches) {
     const dot = document.createElement('div');
     dot.className = 'cursor-dot';
     document.body.appendChild(dot);
@@ -158,6 +160,7 @@
     });
     document.addEventListener('mouseleave', () => dot.style.opacity = '0');
     document.addEventListener('mouseenter', () => dot.style.opacity = '1');
+    }
   </script>
 </body>
 </html>
