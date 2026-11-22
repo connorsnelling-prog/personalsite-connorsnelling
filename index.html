@@ -288,6 +288,10 @@
       color: #555;
       border-radius: 2px;
     }
+    a.about-tag {
+      transition: transform 0.2s ease, border-color 0.15s, color 0.15s;
+    }
+    a.about-tag:hover { transform: translateY(-1px); border-color: #111; color: #111; }
 
     .skills-list {
       display: grid;
@@ -753,9 +757,7 @@
     <div class="about-panel" id="tab-interests">
       <div class="tag-list">
         <span class="about-tag">Reading</span>
-        <span class="about-tag">Coding</span>
         <span class="about-tag">Football</span>
-        <span class="about-tag">F1</span>
         <span class="about-tag">Cooking</span>
         <span class="about-tag">Music</span>
         <span class="about-tag">Cosmology</span>
